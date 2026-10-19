@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet Our Specialists - MedCare</title>
+    
+    <!-- Main CSS Link -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Page Specific Internal Styles -->
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #ffffff;
+            padding: 50px 0;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            margin-bottom: 30px;
+        }
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0 35px 0;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid #007bff;
+            background: transparent;
+            color: #007bff;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #007bff;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.25);
+        }
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            padding: 10px 0 40px 0;
+        }
+        .doctor-card {
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .doctor-card:hover { 
+            transform: translateY(-6px); 
+        }
+        .doctor-img-avatar {
+            width: 90px;
+            height: 90px;
+            background: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 25px auto 15px auto;
+        }
+        .doctor-info { 
+            padding: 0 20px 20px 20px; 
+        }
+        .doctor-dept {
+            color: #007bff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .doctor-name { 
+            margin: 8px 0 4px; 
+            font-size: 1.2rem; 
+        }
+        .schedule-box {
+            background: rgba(0, 123, 255, 0.04);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin: 15px 0;
+            text-align: left;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            border: 1px dashed rgba(0, 123, 255, 0.2);
+        }
+        
+        /* Dark Mode Compatibility for Doctors Page */
+        body.dark-mode .doctor-img-avatar {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+        }
+        body.dark-mode .filter-btn {
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+        body.dark-mode .filter-btn.active, body.dark-mode .filter-btn:hover {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+        body.dark-mode .schedule-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==========================================
+   HEADER SECTION
+   ========================================== -->
+<header class="navbar">
+    <div class="container">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            Med<span>Care</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="my-bookings.html">My Bookings</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <!-- Header Action Button -->
+        <div class="header-actions">
+            <a href="index.html#booking" class="btn btn-primary">Book Now</a>
+        </div>
+    </div>
+</header>
+
+<!-- ==========================================
+   PAGE HEADER BANNER
+   ========================================== -->
+<div class="page-header">
+    <div class="container">
+        <h1 style="margin-bottom: 10px;">Our Certified Medical Specialists</h1>
+        <p style="opacity: 0.9; font-size: 1.05rem;">Choose your doctor and schedule your appointment with ease</p>
+    </div>
+</div>
+
+<!-- ==========================================
+   DOCTORS FILTER & GRID SECTION
+   ========================================== -->
+<div class="container" style="padding: 0 15px;">
+    
+    <!-- Filter Buttons -->
+    <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">All Specialties</button>
+        <button class="filter-btn" data-filter="cardiology">Cardiology</button>
+        <button class="filter-btn" data-filter="neurology">Neurology</button>
+        <button class="filter-btn" data-filter="pediatrics">Pediatrics</button>
+    </div>
+
+    <!-- Doctors Grid -->
+    <div class="doctors-grid">
+        
+        <!-- Doctor 1 -->
+        <div class="doctor-card service-card" data-category="cardiology">
+            <div class="doctor-img-avatar">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div class="doctor-info">
+                <span class="doctor-dept">Cardiology</span>
+                <h3 class="doctor-name">Dr. Sarah Johnson</h3>
+                <p style="font-size: 0.9rem; color: #64748b;">Senior Cardiologist</p>
+                
+                <div class="schedule-box">
+                    <p><strong><i class="fa-regular fa-calendar-check" style="color:#007bff; margin-right:5px;"></i> Working Days:</strong> Mon, Wed, Fri</p>
+                    <p><strong><i class="fa-regular fa-clock" style="color:#007bff; margin-right:5px;"></i> Hours:</strong> 08:00 AM - 04:00 PM</p>
+                </div>
+
+                <a href="index.html#booking" class="btn btn-outline" style="display:block; text-decoration:none;" onclick="redirectToBookingWithDoctor('Dr. Sarah Johnson')">Book Consultation</a>
+            </div>
+        </div>
+
+        <!-- Doctor 2 -->
+        <div class="doctor-card service-card" data-category="cardiology">
+            <div class="doctor-img-avatar">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div class="doctor-info">
+                <span class="doctor-dept">Heart Surgery</span>
+                <h3 class="doctor-name">Dr. Robert Wilson</h3>
+                <p style="font-size: 0.9rem; color: #64748b;">Heart Surgeon</p>
+
+                <div class="schedule-box">
+                    <p><strong><i class="fa-regular fa-calendar-check" style="color:#007bff; margin-right:5px;"></i> Working Days:</strong> Tue, Thu, Sat</p>
+                    <p><strong><i class="fa-regular fa-clock" style="color:#007bff; margin-right:5px;"></i> Hours:</strong> 10:00 AM - 06:00 PM</p>
+                </div>
+
+                <a href="index.html#booking" class="btn btn-outline" style="display:block; text-decoration:none;" onclick="redirectToBookingWithDoctor('Dr. Robert Wilson')">Book Consultation</a>
+            </div>
+        </div>
+
+        <!-- Doctor 3 -->
+        <div class="doctor-card service-card" data-category="neurology">
+            <div class="doctor-img-avatar">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div class="doctor-info">
+                <span class="doctor-dept">Neurology</span>
+                <h3 class="doctor-name">Dr. Michael Chen</h3>
+                <p style="font-size: 0.9rem; color: #64748b;">Neurology Specialist</p>
+
+                <div class="schedule-box">
+                    <p><strong><i class="fa-regular fa-calendar-check" style="color:#007bff; margin-right:5px;"></i> Working Days:</strong> Daily (Except Sunday)</p>
+                    <p><strong><i class="fa-regular fa-clock" style="color:#007bff; margin-right:5px;"></i> Hours:</strong> 09:00 AM - 05:00 PM</p>
+                </div>
+
+                <a href="index.html#booking" class="btn btn-outline" style="display:block; text-decoration:none;" onclick="redirectToBookingWithDoctor('Dr. Michael Chen')">Book Consultation</a>
+            </div>
+        </div>
+
+        <!-- Doctor 4 -->
+        <div class="doctor-card service-card" data-category="pediatrics">
+            <div class="doctor-img-avatar">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div class="doctor-info">
+                <span class="doctor-dept">Pediatrics</span>
+                <h3 class="doctor-name">Dr. Emily Davis</h3>
+                <p style="font-size: 0.9rem; color: #64748b;">Pediatric Specialist</p>
+
+                <div class="schedule-box">
+                    <p><strong><i class="fa-regular fa-calendar-check" style="color:#007bff; margin-right:5px;"></i> Working Days:</strong> Sun, Tue, Thu</p>
+                    <p><strong><i class="fa-regular fa-clock" style="color:#007bff; margin-right:5px;"></i> Hours:</strong> 08:00 AM - 02:00 PM</p>
+                </div>
+
+                <a href="index.html#booking" class="btn btn-outline" style="display:block; text-decoration:none;" onclick="redirectToBookingWithDoctor('Dr. Emily Davis')">Book Consultation</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ==========================================
+   FOOTER SECTION
+   ========================================== -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 MedCare. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- ==========================================
+   PAGE SCRIPTS
+   ========================================== -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const doctorCards = document.querySelectorAll('.doctor-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                doctorCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+
+    // Save selected doctor to localStorage for auto-selection in booking form
+    function redirectToBookingWithDoctor(doctorName) {
+        localStorage.setItem('selectedDoctorForBooking', doctorName);
+    }
+</script>
+
+<!-- Unified Main Script (Handles Floating Dark Mode & Core Logic) -->
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCare - My Bookings</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navigation Bar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Med<span>Care</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="doctors.html">Doctors</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="index.html#booking" class="btn btn-primary">Book Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- My Bookings Content -->
+    <section class="services-section" style="padding: 40px 0; min-height: 80vh;">
+        <div class="container" style="max-width: 700px;">
+            <h2 class="section-title">My Scheduled Appointments</h2>
+            
+            <div id="bookingsContainer">
+                <!-- Bookings rendered dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 MedCare. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Unified Main Script (Handles Floating Dark Mode & Core Logic) -->
+    <script src="js/main.js"></script>
+
+    <!-- Page Specific Script with Modern UI Alerts & Doctor Schedules -->
+    <script>
+        // 1. Unified doctor profiles mapping with working days and active working hours
+        const doctorProfiles = {
+            "Dr. Sarah Johnson": {
+                days: [1, 3, 5], // Mon, Wed, Fri
+                dayNames: "Mon, Wed, Fri",
+                startHour: 8,   // 08:00 AM
+                endHour: 16     // 04:00 PM
+            },
+            "Dr. Robert Wilson": {
+                days: [2, 4, 6], // Tue, Thu, Sat
+                dayNames: "Tue, Thu, Sat",
+                startHour: 10,  // 10:00 AM
+                endHour: 18     // 06:00 PM
+            },
+            "Dr. Michael Chen": {
+                days: [1, 2, 3, 4, 5, 6], // Mon - Sat (Daily except Sunday)
+                dayNames: "Daily except Sunday",
+                startHour: 9,   // 09:00 AM
+                endHour: 17     // 05:00 PM
+            },
+            "Dr. Emily Davis": {
+                days: [0, 2, 4], // Sun, Tue, Thu
+                dayNames: "Sun, Tue, Thu",
+                startHour: 8,   // 08:00 AM
+                endHour: 14     // 02:00 PM
+            }
+        };
+
+        // 2. Comprehensive clinic operating time slots (trimmed to match maximum doctor hours up to 6:00 PM)
+        const masterTimeSlots = [
+            { label: "08:00 AM - 09:00 AM", start: 8 },
+            { label: "09:00 AM - 10:00 AM", start: 9 },
+            { label: "10:00 AM - 11:00 AM", start: 10 },
+            { label: "11:00 AM - 12:00 PM", start: 11 },
+            { label: "12:00 PM - 01:00 PM", start: 12 },
+            { label: "01:00 PM - 02:00 PM", start: 13 },
+            { label: "02:00 PM - 03:00 PM", start: 14 },
+            { label: "03:00 PM - 04:00 PM", start: 15 },
+            { label: "04:00 PM - 05:00 PM", start: 16 },
+            { label: "05:00 PM - 06:00 PM", start: 17 }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBookings();
+            injectModalHTML();
+        });
+
+        // Bulletproof storage retrieval: automatically migrates single 'latestBooking' if array is empty
+        function getStoredBookings() {
+            let bookings = JSON.parse(localStorage.getItem('medcare_all_bookings')) || JSON.parse(localStorage.getItem('medcare_bookings')) || [];
+            if (bookings.length === 0) {
+                const latest = JSON.parse(localStorage.getItem('latestBooking'));
+                if (latest) {
+                    bookings = [latest];
+                    localStorage.setItem('medcare_all_bookings', JSON.stringify(bookings));
+                    localStorage.setItem('medcare_bookings', JSON.stringify(bookings));
+                }
+            }
+            return bookings;
+        }
+
+        function saveStoredBookings(bookings) {
+            localStorage.setItem('medcare_all_bookings', JSON.stringify(bookings));
+            localStorage.setItem('medcare_bookings', JSON.stringify(bookings));
+        }
+
+        function renderBookings() {
+            const container = document.getElementById('bookingsContainer');
+            const bookings = getStoredBookings();
+
+            if (bookings.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 50px 20px; color: #64748b;">
+                        <i class="fa-solid fa-calendar-xmark" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5; color: #007bff;"></i>
+                        <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">No scheduled appointments found.</p>
+                        <a href="index.html#booking" class="btn btn-primary">Book an Appointment Now</a>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+
+            bookings.forEach((booking, index) => {
+                const cardID = index + 1;
+                const patientName = booking.fullName || booking.patientName || 'N/A';
+                const cardHTML = `
+                    <div class="service-card booking-card" id="booking-${cardID}" style="text-align: left; margin-bottom: 20px; position: relative; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 12px;">
+                            <h3 style="margin: 0; font-size: 1.1rem;" id="doc-title-${cardID}">${booking.doctor}</h3>
+                            <span class="status-badge">Confirmed</span>
+                        </div>
+                        
+                        <div id="booking-details-${cardID}" style="font-size: 0.95rem; line-height: 1.7;">
+                            <p><strong>Date:</strong> <span class="val-date">${booking.date}</span> <i class="fa-solid fa-pen" title="Edit Appointment" onclick="enableEdit(${cardID}, '${booking.doctor}', '${booking.date}', '${booking.time}')" style="cursor: pointer; color: #007bff; margin-left: 8px; font-size: 13px;"></i></p>
+                            <p><strong>Time Slot:</strong> <span class="val-time">${booking.time}</span></p>
+                            <p><strong>Patient:</strong> ${patientName}</p>
+                            <p><strong>Phone:</strong> ${booking.phone || 'N/A'}</p>
+                        </div>
+
+                        <!-- Edit Box -->
+                        <div id="edit-box-${cardID}" style="display: none; margin-top: 15px; padding: 15px; background: rgba(0, 123, 255, 0.05); border-radius: 8px; border: 1px solid #cbd5e1;">
+                            <p style="font-weight: 700; font-size: 12px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Update Appointment Slot</p>
+
+                            <!-- Modern Alert Container -->
+                            <div id="edit-alert-${cardID}" style="display: none; margin: 8px 0 12px 0; padding: 10px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; align-items: center; gap: 8px; transition: all 0.3s ease;"></div>
+                            
+                            <label style="font-size: 11px; font-weight: 600; display: block; margin-bottom: 4px;">Select Date:</label>
+                            <input type="date" id="edit-date-${cardID}" value="${booking.date}" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 13px;" onchange="updateEditTimes(${cardID}, '${booking.time}')">
+                            
+                            <label style="font-size: 11px; font-weight: 600; display: block; margin-bottom: 4px;">Select Time Slot:</label>
+                            <select id="edit-time-${cardID}" style="width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 13px;">
+                            </select>
+
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-primary" style="font-size: 11px; padding: 6px 12px; background-color: #10b981; border: none;" onclick="saveEdit(${cardID}, '${booking.doctor}', '${booking.date}', '${booking.time}')">Save Changes</button>
+                                <button class="btn btn-primary" style="font-size: 11px; padding: 6px 12px; background-color: #64748b; border: none;" onclick="cancelEdit(${cardID})">Cancel</button>
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <button class="btn" style="background-color: #fee2e2; color: #991b1b; border: none; font-size: 12px; font-weight: 600; padding: 7px 12px; border-radius: 6px; cursor: pointer;" onclick="openCustomModal('${booking.doctor}', '${booking.date}', '${booking.time}')">
+                                <i class="fa-solid fa-xmark"></i> Cancel Booking
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        function injectModalHTML() {
+            if (document.getElementById('customModalOverlay')) return;
+            const modalHTML = `
+                <div id="customModalOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 9999; justify-content: center; align-items: center;">
+                    <div class="service-card" style="padding: 25px; border-radius: 12px; max-width: 380px; width: 90%; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);">
+                        <div style="width: 50px; height: 50px; background: #fee2e2; color: #dc2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; font-size: 20px;">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <h4 style="margin: 0 0 8px 0; font-size: 1.1rem;">Cancel Appointment?</h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Are you sure you want to cancel this booking? This action cannot be undone.</p>
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <button id="modalConfirmBtn" style="background: #dc2626; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px;">Yes, Cancel</button>
+                            <button onclick="closeCustomModal()" style="background: #f1f5f9; color: #334155; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px;">Keep It</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+
+        let bookingToDelete = null;
+
+        function openCustomModal(doctor, date, time) {
+            bookingToDelete = { doctor, date, time };
+            document.getElementById('customModalOverlay').style.display = 'flex';
+            document.getElementById('modalConfirmBtn').onclick = function() {
+                executeCancellation();
+            };
+        }
+
+        function closeCustomModal() {
+            document.getElementById('customModalOverlay').style.display = 'none';
+            bookingToDelete = null;
+        }
+
+        function executeCancellation() {
+            if (!bookingToDelete) return;
+            let bookings = getStoredBookings();
+            bookings = bookings.filter(b => !(b.doctor === bookingToDelete.doctor && b.date === bookingToDelete.date && b.time === bookingToDelete.time));
+            saveStoredBookings(bookings);
+            closeCustomModal();
+            renderBookings();
+        }
+
+        function enableEdit(cardID, doctor, currentDate, currentTime) {
+            document.querySelectorAll('[id^="edit-box-"]').forEach(box => box.style.display = 'none');
+            
+            const editBox = document.getElementById(`edit-box-${cardID}`);
+            editBox.style.display = 'block';
+            
+            const dateInput = document.getElementById(`edit-date-${cardID}`);
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+
+            updateEditTimes(cardID, currentTime);
+        }
+
+        function cancelEdit(cardID) {
+            document.getElementById(`edit-box-${cardID}`).style.display = 'none';
+            const alertMsg = document.getElementById(`edit-alert-${cardID}`);
+            if (alertMsg) alertMsg.style.display = 'none';
+        }
+
+        // 3. Update available time slots and display warning alert when an invalid working day is selected
+        function updateEditTimes(cardID, oldTime) {
+            const dateInput = document.getElementById(`edit-date-${cardID}`);
+            const timeSelect = document.getElementById(`edit-time-${cardID}`);
+            const selectedDateVal = dateInput.value;
+            const doctor = document.getElementById(`doc-title-${cardID}`).textContent;
+            const profile = doctorProfiles[doctor];
+            const alertMsg = document.getElementById(`edit-alert-${cardID}`);
+
+            if (alertMsg) alertMsg.style.display = 'none';
+
+            // 1) Verify selected day against doctor working days profile
+            if (selectedDateVal && profile) {
+                const parts = selectedDateVal.split('-');
+                const chosenDate = new Date(parts[0], parts[1] - 1, parts[2]);
+                if (!profile.days.includes(chosenDate.getDay())) {
+                    if (alertMsg) {
+                        alertMsg.style.display = 'flex';
+                        alertMsg.style.background = 'rgba(239, 68, 68, 0.12)';
+                        alertMsg.style.color = '#ef4444';
+                        alertMsg.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                        alertMsg.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <span>${doctor} works on <strong>${profile.dayNames}</strong> only.</span>`;
+                    }
+                    timeSelect.innerHTML = `<option value="" disabled selected>-- Choose a valid day first --</option>`;
+                    return;
+                }
+            }
+
+            const existingBookings = getStoredBookings();
+            
+            // 2) Fetch already booked time slots to prevent overlapping
+            const bookedTimes = existingBookings
+                .filter(b => b.doctor === doctor && b.date === selectedDateVal && !(b.date === dateInput.defaultValue && b.time === oldTime))
+                .map(b => b.time);
+
+            timeSelect.innerHTML = '';
+
+            // 3) Append time slots falling strictly within doctor's working hours
+            masterTimeSlots.forEach(slot => {
+                if (profile && slot.start >= profile.startHour && slot.start < profile.endHour) {
+                    const option = document.createElement('option');
+                    option.value = slot.label;
+                    
+                    const isCurrentMySlot = (selectedDateVal === dateInput.defaultValue && slot.label === oldTime);
+                    
+                    if (bookedTimes.includes(slot.label) && !isCurrentMySlot) {
+                        option.textContent = slot.label + ' ❌ (Already Booked)';
+                        option.disabled = true;
+                    } else {
+                        option.textContent = slot.label;
+                    }
+
+                    if (isCurrentMySlot) {
+                        option.selected = true;
+                    }
+
+                    timeSelect.appendChild(option);
+                }
+            });
+        }
+
+        // 4. Save edits and display inline feedback alerts for validation errors
+        function saveEdit(cardID, oldDoctor, oldDate, oldTime) {
+            const dateInput = document.getElementById(`edit-date-${cardID}`);
+            const newDate = dateInput.value;
+            const timeSelect = document.getElementById(`edit-time-${cardID}`);
+            const newTime = timeSelect.value;
+            const doctor = document.getElementById(`doc-title-${cardID}`).textContent;
+            const profile = doctorProfiles[doctor];
+            const alertMsg = document.getElementById(`edit-alert-${cardID}`);
+
+            if (alertMsg) alertMsg.style.display = 'none';
+
+            // Validate selected working day
+            if (newDate && profile) {
+                const parts = newDate.split('-');
+                const chosenDate = new Date(parts[0], parts[1] - 1, parts[2]);
+                if (!profile.days.includes(chosenDate.getDay())) {
+                    if (alertMsg) {
+                        alertMsg.style.display = 'flex';
+                        alertMsg.style.background = 'rgba(239, 68, 68, 0.12)';
+                        alertMsg.style.color = '#ef4444';
+                        alertMsg.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                        alertMsg.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <span>Please choose a valid working day (${profile.dayNames}).</span>`;
+                    }
+                    return;
+                }
+            }
+
+            if (!newTime) {
+                if (alertMsg) {
+                    alertMsg.style.display = 'flex';
+                    alertMsg.style.background = 'rgba(239, 68, 68, 0.12)';
+                    alertMsg.style.color = '#ef4444';
+                    alertMsg.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                    alertMsg.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <span>Please select a valid time slot.</span>`;
+                }
+                return;
+            }
+
+            const freshBookings = getStoredBookings();
+            const isNowBooked = freshBookings.some(b => b.doctor === doctor && b.date === newDate && b.time === newTime && !(b.doctor === oldDoctor && b.date === oldDate && b.time === oldTime));
+
+            if (isNowBooked) {
+                if (alertMsg) {
+                    alertMsg.style.display = 'flex';
+                    alertMsg.style.background = 'rgba(239, 68, 68, 0.12)';
+                    alertMsg.style.color = '#ef4444';
+                    alertMsg.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                    alertMsg.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <span>This slot was just booked by someone else!</span>`;
+                }
+                updateEditTimes(cardID, oldTime);
+                return;
+            }
+
+            const selectedOpt = timeSelect.options[timeSelect.selectedIndex];
+            if (selectedOpt && selectedOpt.disabled) {
+                if (alertMsg) {
+                    alertMsg.style.display = 'flex';
+                    alertMsg.style.background = 'rgba(239, 68, 68, 0.12)';
+                    alertMsg.style.color = '#ef4444';
+                    alertMsg.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                    alertMsg.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <span>Selected time slot is unavailable.</span>`;
+                }
+                return;
+            }
+
+            let bookings = getStoredBookings();
+            const index = bookings.findIndex(b => b.doctor === oldDoctor && b.date === oldDate && b.time === oldTime);
+            
+            if (index !== -1) {
+                bookings[index].date = newDate;
+                bookings[index].time = newTime;
+                saveStoredBookings(bookings);
+                renderBookings();
+            }
+        }
+    </script>
+</body>
+</html>

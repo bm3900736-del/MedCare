@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - MedCare</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main CSS Link -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Page Specific Internal Styles -->
+    <style>
+        .confirmation-card {
+            max-width: 550px;
+            margin: 60px auto;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color, #e2e8f0);
+            text-align: center;
+        }
+        .icon-success {
+            width: 70px;
+            height: 70px;
+            background: #d4edda;
+            color: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+        }
+        .details-list {
+            text-align: left;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid #edf2f7;
+        }
+        .details-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .details-item:last-child {
+            border-bottom: none;
+        }
+        .details-label {
+            font-weight: 600;
+        }
+        .details-value {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==========================================
+   HEADER SECTION
+   ========================================== -->
+<header class="navbar">
+    <div class="container">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            Med<span>Care</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <nav>
+            <ul class="nav-links">
+                <li><a href="doctors.html">Doctors</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <!-- Header Action Button -->
+        <div class="header-actions">
+            <a href="index.html#booking" class="btn btn-primary">Book Now</a>
+        </div>
+    </div>
+</header>
+
+<!-- ==========================================
+   CONFIRMATION CONTENT SECTION
+   ========================================== -->
+<section class="confirmation-section">
+    <div class="container">
+        <div class="confirmation-card service-card">
+            <div class="icon-success"><i class="fa-solid fa-check"></i></div>
+            <h2 class="confirmation-title">Appointment Confirmed!</h2>
+            <p class="confirmation-subtitle">Thank you for booking with MedCare. Here are your details:</p>
+
+            <!-- Dynamic Details List Container -->
+            <div class="details-list" id="bookingDetails">
+                <!-- Data will be inserted dynamically via JavaScript -->
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <a href="my-bookings.html" class="btn btn-primary" style="display: inline-block; text-decoration: none; padding: 12px 20px; border-radius: 8px;">View My Bookings</a>
+                <a href="index.html" class="btn" style="display: inline-block; text-decoration: none; padding: 12px 20px; border-radius: 8px; background: #6c757d; color: white;">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================
+   FOOTER SECTION
+   ========================================== -->
+<footer class="footer" style="margin-top: 50px;">
+    <div class="container">
+        <p>&copy; 2026 MedCare. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- ==========================================
+   PAGE SCRIPTS
+   ========================================== -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Retrieve the latest booking data from localStorage or sessionStorage
+        const bookingData = JSON.parse(localStorage.getItem('latestBooking')) || JSON.parse(sessionStorage.getItem('latest_booking'));
+        const detailsContainer = document.getElementById('bookingDetails');
+
+        if (bookingData && detailsContainer) {
+            const patientName = bookingData.fullName || bookingData.patientName || 'N/A';
+            detailsContainer.innerHTML = `
+                <div class="details-item">
+                    <span class="details-label">Patient Name:</span>
+                    <span class="details-value">${patientName}</span>
+                </div>
+                <div class="details-item">
+                    <span class="details-label">Doctor:</span>
+                    <span class="details-value">${bookingData.doctor}</span>
+                </div>
+                <div class="details-item">
+                    <span class="details-label">Date:</span>
+                    <span class="details-value">${bookingData.date}</span>
+                </div>
+                <div class="details-item">
+                    <span class="details-label">Time:</span>
+                    <span class="details-value">${bookingData.time}</span>
+                </div>
+            `;
+        } else if (detailsContainer) {
+            detailsContainer.innerHTML = `<p style="text-align:center; color:#dc3545;">No recent booking details found.</p>`;
+        }
+    });
+</script>
+
+<!-- Unified Main Script (Handles Floating Dark Mode Toggle) -->
+<script src="js/main.js"></script>
+</body>
+</html>

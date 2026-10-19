@@ -1,0 +1,675 @@
+/* ==========================================
+   1. CSS VARIABLES (EASY CUSTOMIZATION)
+   ========================================== */
+:root {
+    --primary-color: #0d6efd;
+    --primary-hover: #0b5ed7;
+    --text-color: #212529;
+    --bg-light: #f8f9fa;
+    --white: #ffffff;
+    --font-family: system-ui, -apple-system, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--white);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    width: 85%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ==========================================
+   2. NAVBAR & HEADER
+   ========================================== */
+.navbar {
+    background: var(--white);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #0f172a !important;
+}
+
+.logo span {
+    color: #007bff !important;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ==========================================
+   3. BUTTONS
+   ========================================== */
+.btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* ==========================================
+   4. HERO & SERVICES SECTIONS
+   ========================================== */
+.hero-section {
+    background: var(--bg-light);
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.hero-text p {
+    margin-bottom: 1.5rem;
+    color: #6c757d;
+}
+
+.services-section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.service-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* ==========================================
+   5. DOCTORS SECTION (4 IN A ROW)
+   ========================================== */
+.doctors-section {
+    padding: 60px 0;
+    background-color: #ffffff;
+}
+
+.doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.doctor-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    background: #fff;
+}
+
+.doctor-image img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+.doctor-info {
+    padding: 15px;
+}
+
+.doctor-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.doctor-info .specialty {
+    color: #007bff;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* ==========================================
+   6. TESTIMONIALS & FAQ SECTIONS
+   ========================================== */
+.testimonials-section {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.testimonial-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.review-text {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.patient-name {
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+}
+
+.faq-section {
+    padding: 60px 0;
+    background-color: #ffffff;
+}
+
+.faq-list {
+    max-width: 800px;
+    margin: 30px auto 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: #fafafa;
+}
+
+.faq-question {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    color: #007bff;
+}
+
+.faq-answer {
+    margin: 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* ==========================================
+   7. BOOKING FORM & DOCTOR DROPDOWN UNIFIED
+   ========================================== */
+.booking-section {
+    background: var(--bg-light);
+    padding: 4rem 0;
+}
+
+.booking-card-wrapper,
+.appointment-form,
+.booking-form {
+    max-width: 500px;
+    margin: auto;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.booking-section .form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.booking-section label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.booking-section input[type="text"],
+.booking-section input[type="date"],
+.booking-section input[type="time"] {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    background-color: #f8fafc;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.booking-section select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    background-color: #f8fafc;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%2364748b' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+    padding-right: 40px;
+}
+
+.booking-section input:focus,
+.booking-section select:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
+}
+
+#doctorSelect optgroup {
+    font-weight: 700 !important;
+    font-style: normal !important;
+    color: #007bff !important;
+    background-color: #f8f9fa !important;
+    padding: 8px !important;
+}
+
+#doctorSelect option {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    color: #212529 !important;
+    background-color: #ffffff !important;
+    padding: 8px 12px !important;
+    border: none !important;
+    outline: none !important;
+}
+
+.form-message {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+/* ==========================================
+   8. FOOTER
+   ========================================== */
+.footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background: #212529;
+    color: var(--white);
+}
+
+/* ==========================================
+   9. FLOATING DARK MODE BUTTON (UNIFIED)
+   ========================================== */
+#theme-toggle {
+    position: fixed !important;
+    bottom: 25px !important;
+    right: 25px !important;
+    z-index: 10000 !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    border: none !important;
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    outline: none !important;
+    transition: transform 0.2s ease !important;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.08) !important;
+}
+
+/* ==========================================
+   10. DARK MODE OVERRIDES
+   ========================================== */
+body.dark-mode {
+    background-color: #121824 !important;
+    color: #e2e8f0 !important;
+}
+
+body.dark-mode .navbar,
+body.dark-mode .hero-section,
+body.dark-mode .services-section,
+body.dark-mode .doctors-section,
+body.dark-mode .testimonials-section,
+body.dark-mode .faq-section,
+body.dark-mode .booking-section {
+    background-color: #121824 !important;
+}
+
+body.dark-mode .service-card,
+body.dark-mode .doctor-card,
+body.dark-mode .testimonial-card,
+body.dark-mode .faq-item {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .booking-card-wrapper,
+body.dark-mode .appointment-form,
+body.dark-mode .booking-form {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode h4, 
+body.dark-mode p, 
+body.dark-mode label,
+body.dark-mode span,
+body.dark-mode .nav-links a,
+body.dark-mode .review-text,
+body.dark-mode .patient-name,
+body.dark-mode .faq-answer {
+    color: #f1f5f9 !important;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea,
+body.dark-mode .appointment-form .form-control {
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+    border: 1px solid #334155 !important;
+}
+
+body.dark-mode #doctorSelect optgroup {
+    background-color: #1e293b !important;
+    color: #64b5f6 !important;
+}
+
+body.dark-mode #doctorSelect option {
+    background-color: #0f172a !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .navbar .logo {
+    color: #0f172a !important;
+    text-shadow: 
+        0 0 1px #ffffff,
+        0 0 2px #ffffff,
+        0 0 8px rgba(255, 255, 255, 0.8) !important;
+}
+
+body.dark-mode .navbar .logo span {
+    color: #007bff !important;
+    -webkit-text-stroke: 0px;
+}
+
+/* ==========================================
+   11. CONFIRMATION PAGE STYLES
+   ========================================== */
+.confirmation-card {
+    background-color: #ffffff;
+    color: #1e293b;
+}
+
+.details-list {
+    background-color: #f8fafc;
+    border-color: #edf2f7;
+}
+
+.confirmation-title { color: #1e293b; margin-bottom: 10px; }
+.confirmation-subtitle { color: #64748b; }
+.details-label { color: #64748b; }
+.details-value { color: #1e293b; }
+
+body.dark-mode .confirmation-card {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+}
+
+body.dark-mode .details-list {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+}
+
+body.dark-mode .details-item {
+    border-bottom-color: #334155 !important;
+}
+
+body.dark-mode .confirmation-title,
+body.dark-mode .details-value {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .confirmation-subtitle,
+body.dark-mode .details-label {
+    color: #94a3b8 !important;
+}
+
+/* ==========================================
+   12. MEDIA QUERIES (RESPONSIVE NAVBAR)
+   ========================================== */
+@media (max-width: 992px) {
+    .doctors-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar .container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 8px 6px !important;
+        width: 100% !important;
+        gap: 4px !important;
+    }
+
+    .navbar .logo {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+
+    .nav-links {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-evenly !important;
+        gap: 2px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+        flex-grow: 1 !important;
+    }
+
+    .nav-links a {
+        font-size: 11px !important;
+        font-weight: 500 !important;
+        padding: 2px !important;
+        white-space: nowrap !important;
+    }
+
+    .header-actions {
+        flex-shrink: 0 !important;
+    }
+
+    .header-actions .btn-primary {
+        padding: 6px 8px !important;
+        font-size: 10.5px !important;
+        white-space: nowrap !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .doctors-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+#doctorSelect option.category-header {
+    font-weight: bold !important;
+    color: #007bff !important;
+    background-color: #f1f5f9 !important;
+    text-align: center;
+    padding: 6px 0 !important;
+}
+
+body.dark-mode #doctorSelect option.category-header {
+    color: #38bdf8 !important;
+    background-color: #1e293b !important;
+}
+
+body.dark-mode .error-title {
+    color: #ffffff;
+}
+
+body.dark-mode .error-desc {
+    color: #b0b0b0;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+body.dark-mode .service-card,
+body.dark-mode .navbar {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+    border-color: #333333;
+}
+
+.status-badge,
+.booking-card span[style*="e0f2fe"] {
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    padding: 4px 10px !important;
+    border-radius: 20px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    display: inline-block !important;
+}
+
+body.dark-mode .booking-card span[style*="e0f2fe"],
+body.dark-mode .status-badge {
+    background-color: rgba(56, 189, 248, 0.2) !important;
+    color: #38bdf8 !important;
+    border: 1px solid rgba(56, 189, 248, 0.4) !important;
+}
+
+.btn-outline {
+    background-color: transparent !important;
+    border: 2px solid #007bff !important;
+    color: #007bff !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .btn-outline {
+    border-color: #38bdf8 !important;
+    color: #38bdf8 !important;
+}
+
+body.dark-mode .btn-outline:hover {
+    background-color: #38bdf8 !important;
+}

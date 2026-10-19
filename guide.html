@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCare - Comprehensive Developer & User Guide</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      
+     .sidebar-brand {
+     font-size: 1.4rem;
+     font-weight: 700;
+     color: var(--text-main);
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+  .sidebar-brand .brand-text {
+    color: var(--text-main);
+}
+
+.sidebar-brand .brand-text span {
+    color: var(--primary-color);
+}
+
+        :root {
+            --sidebar-width: 290px;
+            --primary-color: #0d6efd;
+            --primary-hover: #0b5ed7;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --code-bg: #0f172a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif; color: var(--text-main); background: var(--bg-body); display: flex; min-height: 100vh; line-height: 1.6; }
+
+        /* Sidebar Navigation */
+        .sidebar { width: var(--sidebar-width); background: var(--bg-card); border-right: 1px solid var(--border-color); position: fixed; top: 0; bottom: 0; left: 0; padding: 25px 20px; overflow-y: auto; z-index: 100; }
+        .sidebar-brand { font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px; }
+        .sidebar-brand span { color: var(--primary-color); }
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li { margin-bottom: 4px; }
+        .sidebar-menu a { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.88rem; display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; transition: all 0.2s ease; }
+        .sidebar-menu a:hover, .sidebar-menu a.active { background: #eff6ff; color: var(--primary-color); font-weight: 600; }
+
+        /* Main Content Layout */
+        .main-content { margin-left: var(--sidebar-width); flex: 1; padding: 40px 50px; max-width: 1100px; width: 100%; }
+        .guide-card { background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); padding: 35px; margin-bottom: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); overflow: hidden; }
+        
+        /* Typography */
+        h1.guide-title { font-size: 2.1rem; color: var(--text-main); margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px; }
+        h2.section-title { font-size: 1.4rem; color: var(--text-main); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-top: 10px; }
+        h3.subsection-title { font-size: 1.1rem; color: var(--primary-color); margin: 22px 0 10px 0; }
+        p { color: var(--text-muted); margin-bottom: 15px; font-size: 0.95rem; }
+        ul, ol { margin-left: 20px; color: var(--text-muted); margin-bottom: 15px; }
+        li { margin-bottom: 8px; font-size: 0.92rem; }
+
+        /* Responsive Table Container */
+        .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0; border: 1px solid var(--border-color); border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th, td { border-bottom: 1px solid var(--border-color); padding: 12px 15px; text-align: left; font-size: 0.88rem; }
+        th { background: #f8fafc; color: var(--text-main); font-weight: 600; }
+        td { color: var(--text-muted); }
+        tr:last-child td { border-bottom: none; }
+
+        /* Code & Notice Boxes */
+        pre { background: var(--code-bg); color: #38bdf8; padding: 18px; border-radius: 8px; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.88rem; overflow-x: auto; margin: 15px 0; line-height: 1.5; }
+        code { background: #f1f5f9; color: #d63384; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.88rem; }
+        .notice-box { background: #eff6ff; border-left: 4px solid var(--primary-color); padding: 15px; border-radius: 0 8px 8px 0; margin: 18px 0; color: #1e3a8a; font-size: 0.92rem; }
+        .warning-box { background: #fff7ed; border-left: 4px solid #f97316; padding: 15px; border-radius: 0 8px 8px 0; margin: 18px 0; color: #9a3412; font-size: 0.92rem; }
+
+        /* Mobile Layout Modifications */
+        @media (max-width: 992px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); padding: 20px; }
+            .main-content { margin-left: 0; padding: 20px 15px; }
+            .guide-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+<div class="sidebar-brand">
+    <i class="fa-solid fa-heart-pulse"></i>
+    <span class="brand-text">Med<span>Care</span></span>
+</div>
+        <ul class="sidebar-menu">
+            <li><a href="#overview" class="active"><i class="fa-solid fa-house"></i> Overview</a></li>
+            <li><a href="#deployment"><i class="fa-solid fa-rocket"></i> Deployment & Setup</a></li>
+            <li><a href="#structure"><i class="fa-solid fa-folder-tree"></i> Project Structure</a></li>
+            <li><a href="#pages"><i class="fa-solid fa-file-code"></i> Page Specifications</a></li>
+            <li><a href="#css-variables"><i class="fa-solid fa-palette"></i> CSS Variables Reference</a></li>
+            <li><a href="#darkmode"><i class="fa-solid fa-moon"></i> Dark Mode System</a></li>
+            <li><a href="#forms"><i class="fa-solid fa-envelope-open-text"></i> Form & Backend Setup</a></li>
+            <li><a href="#editing"><i class="fa-solid fa-pen-to-square"></i> Content Editing Guide</a></li>
+            <li><a href="#seo"><i class="fa-solid fa-gauge-high"></i> SEO & Performance</a></li>
+            <li><a href="#credits"><i class="fa-solid fa-award"></i> Credits & Assets</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
+
+        <!-- 1. OVERVIEW -->
+        <section id="overview" class="guide-card">
+            <h1 class="guide-title">MedCare - Developer & User Manual</h1>
+            <p>Welcome to the official developer and end-user guide for <strong>MedCare</strong>, a high-performance HTML5 template engineered specifically for modern healthcare facilities, clinics, hospitals, and private practices.</p>
+            <div class="notice-box">
+                <i class="fa-solid fa-circle-info"></i> <strong>Core Highlights:</strong> Pure W3C Valid HTML5, Native CSS Variables, Zero-dependency Light/Dark Mode, Pure JavaScript Validation, Ultra-Fast Load Speed, and Native Mobile Responsiveness.
+            </div>
+        </section>
+
+        <!-- 2. DEPLOYMENT & SETUP -->
+        <section id="deployment" class="guide-card">
+            <h2 class="section-title"><i class="fa-solid fa-rocket"></i> 1. Quick Start & Deployment</h2>
+            <p>Deploying MedCare to a live Web Server (cPanel, Netlify, Vercel, or Apache/Nginx) is straightforward:</p>
+            <ol>
+                <li>Unzip the downloaded <code>MedCare.zip</code> package on your local computer.</li>
+                <li>Upload all files and folders (<code>css/</code>, <code>js/</code>, <code>guide/</code>, and all <code>.html</code> files) to your server's root directory (usually <code>public_html/</code>).</li>
+                <li>Open your domain in any modern browser to verify the site is running live.</li>
+            </ol>
+        </section>
+
+        <!-- 3. PROJECT STRUCTURE -->
+        <section id="structure" class="guide-card">
+            <h2 class="section-title"><i class="fa-solid fa-folder-tree"></i> 2. Directory Architecture</h2>
+            <p>The root folder is structured cleanly to separate scripts, styles, and core pages:</p>
+            <pre>
+MedCare/
+├── css/
+│   └── style.css          # Core stylesheet containing CSS variables, dark mode & layout rules
+├── js/
+│   └── main.js             # Logic for dark mode persistence, navigation, and JS form validation
+├── guide/
+│   └── guide.html          # Detailed Template Documentation (This File)
+├── 404.html                # Custom Responsive Error Page
+├── confirmation.html       # Success & Booking Confirmation Screen
+├── contact.html            # Contact Page with Strict English JS Validation
+├── doctors.html            # Medical Specialists Directory
+├── index.html              # Main Landing Page with Interactive Booking Form
+├── my-bookings.html        # Patient Reservation Tracking Dashboard
+└── services.html           # Healthcare Services Showcase
+            </pre>
+        </section>
+
+        <!-- 4. PAGE SPECIFICATIONS -->
+        <section id="pages" class="guide-card">
+            <h2 class="section-title"><i class="fa-solid fa-file-code"></i> 3. Page Specifications</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Page File</th>
+                            <th>Description & Components</th>
+                            <th>Key JS / CSS Features</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>index.html</code></td>
+                            <td>Main Homepage featuring Hero, Services, Doctor Highlights, and Booking Form.</td>
+                            <td>Live booking form validation, smooth scrolling anchor navigation.</td>
+                        </tr>
+                        <tr>
+                            <td><code>contact.html</code></td>
+                            <td>Clean Flat Design Contact page with office info and enquiry form.</td>
+                            <td>Strict Regex Email validation, auto-hiding English success notifications.</td>
+                        </tr>
+                        <tr>
+                            <td><code>doctors.html</code></td>
+                            <td>Specialist Team Directory showcasing medical personnel.</td>
+                            <td>Icon-based doctor cards with direct booking links.</td>
+                        </tr>
+                        <tr>
+                            <td><code>services.html</code></td>
+                            <td>Detailed listing of medical departments and clinical services.</td>
+                            <td>Responsive grid cards for departments and specialties.</td>
+                        </tr>
+                        <tr>
+                            <td><code>my-bookings.html</code></td>
+                            <td>Patient Dashboard for tracking active and past appointments.</td>
+                            <td>Appointment status indicators and management UI.</td>
+                        </tr>
+                        <tr>
+                            <td><code>confirmation.html</code></td>
+                            <td>Confirmation screen shown after submitting a form or booking.</td>
+                            <td>Clear feedback message and "Return to Homepage" button.</td>
+                        </tr>
+                        <tr>
+                            <td><code>404.html</code></td>
+                            <td>Custom error page displayed when visiting broken links.</td>
+                            <td>Maintains site theme, dark mode compatibility, and home link.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 5. CSS VARIABLES REFERENCE -->
+        <section id="css-variables" class="guide-card">
+            <h2 class="section-title"><i class="fa-solid fa-palette"></i> 4. CSS Variables Reference</h2>
+            <p>You can customize the full theme palette by modifying variables inside <code>css/style.css</code> in the <code>:root</code> block:</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Variable Name</th>
+                            <th>Default Hex / Value</th>
+                            <th>Purpose / Applied Components</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>--primary-color</code></td>
+                            <td><code>#0d6efd</code></td>
+                            <td>Primary brand color used in buttons, active icons, and links.</td>
+                        </tr>
+                        <tr>
+                            <td><code>--primary-hover</code></td>
+                            <td><code>#0b5ed7</code></td>
+                            <td>Hover state color for primary buttons and interactive elements.</td>
+                        </tr>
+                        <tr>
+                            <td><code>--bg-main</code></td>
+                            <td><code>#ffffff</code></td>
+                            <td>Main body background color in Light Mode.</td>
+                        </tr>
+                        <tr>
+                            <td><code>--bg-secondary</code></td>
+                            <td><code>#f8f9fa</code></td>
+                            <td>Background color for cards, sections, and input fields.</td>
+                        </tr>
+                        <tr>
+                            <td><code>--text-primary</code></td>
+                            <td><code>#212529</code></td>
+                            <td>Main heading and body text color in Light Mode.</td>
+                        </tr>
+                        <tr>
+                            <td><code>--text-muted</code></td>
+                            <td><code>#6c757d</code></td>
+                            <td>Secondary paragraphs, subtitles, and placeholder text.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 6. DARK MODE SYSTEM -->
+        <section id="darkmode" class="guide-card">
+            <h2 class="section-title"><i class="fa-solid fa-moon"></i> 5. Dark Mode System Architecture</h2>
+            <p>Dark mode is driven by appending <code>.dark-mode</code> class to <code>&lt;body&gt;</code> via <code>js/main.js</code>, and uses browser <code>localStorage</code> to remember theme settings across pages.</p>
+            <p>To adjust Dark Mode colors, edit the <code>body.dark-mode</code> block in <code>css/style.css</code>:</p>
+            <pre>
+body.dark-mode {
+    --bg-main: #0b0f19;          /* Dark mode body background */
+    --bg-secondary: #111827;     /* Dark mode card background */
+    --text-primary: #f8fafc;     /* Dark mode main title text */
+    --text-muted: #94a3b8;       /* Dark mode secondary text */
+    --border-color: #1e293b;     /* Dark mode borders */
+}
+            </pre>
+        </section>
+
+        <!-- 7. FORM & BACKEND INTEGRATION -->
+        <section id="forms" class="guide-card">
+            <h2 class="section-title"><i class="fa-solid fa-envelope-open-text"></i> 6. Form & Backend Integration Guide</h2>
+            <p>The forms on <code>index.html</code> and <code>contact.html</code> feature pure JS front-end validation. To receive email submissions on a live server, choose one of these options:</p>
+
+            <h3 class="subsection-title">Option A: Using Formspree (No Server Code Required)</h3>
+            <p>1. Create a free account on <a href="https://formspree.io" target="_blank">Formspree.io</a>.</p>
+            <p>2. Replace the <code>&lt;form&gt;</code> tag in your HTML page with your Formspree endpoint:</p>
+            <pre>
+&lt;form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" id="contactForm"&gt;
+            </pre>
+
+            <h3 class="subsection-title">Option B: Connecting a PHP Script</h3>
+            <p>Set your form action to point to a backend PHP script on your hosting server:</p>
+            <pre>
+&lt;form action="send-email.php" method="POST" id="bookingForm"&gt;
+            </pre>
+            <div class="warning-box">
+                <i class="fa-solid fa-triangle-exclamation"></i> <strong>Note:</strong> Front-end validation rules inside <code>js/main.js</code> will run first to verify user input before handing off the payload to your backend service.
+            </div>
+        </section>
+
+        <!-- 8. CONTENT EDITING GUIDE -->
+        <section id="editing" class="guide-card">
+            <h2 class="section-title"><i class="fa-solid fa-pen-to-square"></i> 7. Content Editing Guide</h2>
+
+            <h3 class="subsection-title">A. Editing Doctors Directory (`doctors.html`)</h3>
+            <p>To add a doctor profile card, duplicate the following block inside the grid container:</p>
+            <pre>
+&lt;div class="doctor-card"&gt;
+    &lt;div class="doctor-icon"&gt;
+        &lt;i class="fa-solid fa-user-doctor"&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;h3&gt;Dr. Sarah Johnson&lt;/h3&gt;
+    &lt;p&gt;Pediatric Specialist&lt;/p&gt;
+    &lt;a href="index.html" class="btn btn-primary"&gt;Book Appointment&lt;/a&gt;
+&lt;/div&gt;
+            </pre>
+
+            <h3 class="subsection-title">B. Changing Font Awesome Icons</h3>
+            <p>You can swap icons anywhere by changing class names on the <code>&lt;i class="..."&gt;&lt;/i&gt;</code> element:</p>
+            <ul>
+                <li><code>fa-solid fa-user-doctor</code> (Doctor icon)</li>
+                <li><code>fa-solid fa-heart-pulse</code> (Cardiology icon)</li>
+                <li><code>fa-solid fa-phone</code> (Phone / Contact icon)</li>
+                <li><code>fa-solid fa-clock</code> (Working Hours icon)</li>
+            </ul>
+        </section>
+
+        <!-- 9. SEO & PERFORMANCE -->
+        <section id="seo" class="guide-card">
+            <h2 class="section-title"><i class="fa-solid fa-gauge-high"></i> 8. SEO & Performance Optimization</h2>
+            <ul>
+                <li><strong>No Heavy External Assets:</strong> Zero heavy images or large JS frameworks, resulting in extremely fast page load scores.</li>
+                <li><strong>Meta Tags:</strong> Each HTML file includes responsive viewport meta tags. Be sure to update <code>&lt;title&gt;</code> and <code>&lt;meta name="description"&gt;</code> tags for production SEO.</li>
+                <li><strong>Clean W3C Code:</strong> All markup adheres strictly to modern HTML5 standards.</li>
+            </ul>
+        </section>
+
+        <!-- 10. CREDITS & ASSETS -->
+        <section id="credits" class="guide-card">
+            <h2 class="section-title"><i class="fa-solid fa-award"></i> 9. Credits & Included Assets</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Asset Name</th>
+                            <th>Type</th>
+                            <th>Source / License</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Font Awesome 6</strong></td>
+                            <td>Icon CDN Package</td>
+                            <td>Free Commercial License (<code>cdnjs.cloudflare.com</code>)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>System UI Font Stack</strong></td>
+                            <td>Typography</td>
+                            <td>Native System Fonts (Fast Loading & High Readability)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="margin-top: 20px;">If you require further technical assistance or customization support, please contact us via our author profile page.</p>
+        </section>
+
+    </main>
+
+</body>
+</html>

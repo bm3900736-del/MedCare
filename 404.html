@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | MedCare</title>
+    
+    <!-- CSS File -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Page Specific Styles for 404 Error -->
+    <style>
+        .error-page-section {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .error-card-box {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 40px 30px;
+            border-radius: 16px;
+        }
+        .error-code {
+            font-size: 5.5rem;
+            font-weight: 800;
+            color: #007bff;
+            line-height: 1;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+        .error-icon {
+            font-size: 3.5rem;
+            color: #007bff;
+            margin-bottom: 20px;
+            animation: pulse 2.5s infinite;
+        }
+        .error-title {
+            font-size: 1.75rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .error-description {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.85; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Dark Mode Compatibility via Global main.js */
+        body.dark-mode .error-code,
+        body.dark-mode .error-icon {
+            color: #38bdf8;
+        }
+        body.dark-mode .error-description {
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==========================================
+   HEADER SECTION
+   ========================================== -->
+<header class="navbar">
+    <div class="container">
+        <!-- Unified Logo -->
+        <a href="index.html" class="logo">Med<span>Care</span></a>
+        
+        <!-- Navigation Links -->
+        <nav>
+            <ul class="nav-links">
+                <li><a href="doctors.html">Doctors</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="my-bookings.html">My Bookings</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-actions">
+            <a href="index.html#booking" class="btn btn-primary">Book Now</a>
+        </div>
+    </div>
+</header>
+
+<!-- ==========================================
+   404 ERROR CONTENT SECTION
+   ========================================== -->
+<section class="error-page-section">
+    <div class="container">
+        <div class="error-card-box service-card">
+            <div class="error-icon">
+                <i class="fa-solid fa-user-nurse"></i>
+            </div>
+            <div class="error-code">404</div>
+            <h1 class="error-title">Oops! Page Not Found</h1>
+            <p class="error-description">The page or resource you are looking for might have been moved, renamed, or is temporarily unavailable.</p>
+            <a href="index.html" class="btn btn-primary" style="display: inline-block; padding: 12px 28px; text-decoration: none;">
+                <i class="fa-solid fa-house" style="margin-right: 8px;"></i> Return to Homepage
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================
+   FOOTER SECTION
+   ========================================== -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 MedCare. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Centralized Main JS File (Handles Dark Mode & Navigation Logic) -->
+<script src="js/main.js"></script>
+</body>
+</html>

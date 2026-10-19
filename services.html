@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Medical Services - MedCare</title>
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Page Specific Internal Styles -->
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #ffffff;
+            padding: 50px 0;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            margin-bottom: 30px;
+        }
+        .services-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 25px; 
+            padding: 20px 0 40px 0; 
+        }
+        .service-card { 
+            border-radius: 12px; 
+            padding: 25px; 
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+        }
+        .service-icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 18px;
+        }
+        .service-price { 
+            font-size: 1.35rem; 
+            color: #10b981; 
+            font-weight: 700; 
+            margin: 15px 0 10px 0; 
+        }
+        .doctor-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 123, 255, 0.08);
+            color: #007bff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 20px 0;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: #64748b;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feature-list li i {
+            color: #10b981;
+            font-size: 0.85rem;
+        }
+
+        /* Dark Mode Compatibility */
+        body.dark-mode .service-icon-box {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+        }
+        body.dark-mode .doctor-badge {
+            background: rgba(56, 189, 248, 0.12);
+            color: #38bdf8;
+        }
+        body.dark-mode .feature-list {
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==========================================
+   HEADER SECTION
+   ========================================== -->
+<header class="navbar">
+    <div class="container">
+        <!-- Logo -->
+        <a href="index.html" class="logo">Med<span>Care</span></a>
+
+        <!-- Navigation Links -->
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="doctors.html">Doctors</a></li>
+                <li><a href="my-bookings.html">My Bookings</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <!-- Header Action Button -->
+        <div class="header-actions">
+            <a href="index.html#booking" class="btn btn-primary">Book Now</a>
+        </div>
+    </div>
+</header>
+
+<!-- ==========================================
+   PAGE HEADER BANNER
+   ========================================== -->
+<div class="page-header">
+    <div class="container">
+        <h1 style="margin-bottom: 10px;">Comprehensive Healthcare Services</h1>
+        <p style="opacity: 0.9; font-size: 1.05rem;">Transparent pricing, top medical standards, and specialist-led care</p>
+    </div>
+</div>
+
+<!-- ==========================================
+   SERVICES GRID SECTION
+   ========================================== -->
+<div class="container">
+    <div class="services-grid">
+        
+        <!-- Service 1: Cardiology Consultation -->
+        <div class="service-card service-card-box">
+            <div>
+                <div class="service-icon-box">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <h3 style="margin-bottom: 8px;">Cardiology Consultation</h3>
+                <div class="doctor-badge">
+                    <i class="fa-solid fa-user-doctor"></i> Lead: Dr. Sarah Johnson
+                </div>
+                <p style="font-size: 0.9rem; color: #64748b;">Complete cardiovascular evaluation, blood pressure monitoring, and heart health screening.</p>
+                
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Comprehensive ECG Testing</li>
+                    <li><i class="fa-solid fa-check"></i> Heart Disease Risk Assessment</li>
+                    <li><i class="fa-solid fa-check"></i> Direct Specialist Follow-up</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="service-price">$120 <span style="font-size: 0.8rem; font-weight: normal; color: #64748b;">/ session</span></div>
+                <a href="index.html#booking" class="btn btn-outline" style="display: block; text-align: center; text-decoration: none;" onclick="bookServiceForDoctor('Dr. Sarah Johnson')">Book This Service</a>
+            </div>
+        </div>
+
+        <!-- Service 2: Cardiac & Surgery Consult -->
+        <div class="service-card service-card-box">
+            <div>
+                <div class="service-icon-box">
+                    <i class="fa-solid fa-hospital-user"></i>
+                </div>
+                <h3 style="margin-bottom: 8px;">Cardiac & Surgery Consult</h3>
+                <div class="doctor-badge">
+                    <i class="fa-solid fa-user-doctor"></i> Lead: Dr. Robert Wilson
+                </div>
+                <p style="font-size: 0.9rem; color: #64748b;">Surgical cardiac evaluation, pre-operative screening, and specialized cardiovascular care.</p>
+
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Surgical Pre-Assessment</li>
+                    <li><i class="fa-solid fa-check"></i> Advanced Vascular Screening</li>
+                    <li><i class="fa-solid fa-check"></i> Post-Op Care Plan</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="service-price">$200 <span style="font-size: 0.8rem; font-weight: normal; color: #64748b;">/ session</span></div>
+                <a href="index.html#booking" class="btn btn-outline" style="display: block; text-align: center; text-decoration: none;" onclick="bookServiceForDoctor('Dr. Robert Wilson')">Book This Service</a>
+            </div>
+        </div>
+
+        <!-- Service 3: Neurology Examination -->
+        <div class="service-card service-card-box">
+            <div>
+                <div class="service-icon-box">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h3 style="margin-bottom: 8px;">Neurology Examination</h3>
+                <div class="doctor-badge">
+                    <i class="fa-solid fa-user-doctor"></i> Lead: Dr. Michael Chen
+                </div>
+                <p style="font-size: 0.9rem; color: #64748b;">Advanced diagnostic evaluation for headaches, nerve disorders, and central nervous system health.</p>
+
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Neurological Motor Exams</li>
+                    <li><i class="fa-solid fa-check"></i> Reflex & Cognitive Testing</li>
+                    <li><i class="fa-solid fa-check"></i> Personalized Treatment Plan</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="service-price">$150 <span style="font-size: 0.8rem; font-weight: normal; color: #64748b;">/ session</span></div>
+                <a href="index.html#booking" class="btn btn-outline" style="display: block; text-align: center; text-decoration: none;" onclick="bookServiceForDoctor('Dr. Michael Chen')">Book This Service</a>
+            </div>
+        </div>
+
+        <!-- Service 4: Pediatric Care & Checkup -->
+        <div class="service-card service-card-box">
+            <div>
+                <div class="service-icon-box">
+                    <i class="fa-solid fa-baby"></i>
+                </div>
+                <h3 style="margin-bottom: 8px;">Pediatric Care & Checkup</h3>
+                <div class="doctor-badge">
+                    <i class="fa-solid fa-user-doctor"></i> Lead: Dr. Emily Davis
+                </div>
+                <p style="font-size: 0.9rem; color: #64748b;">Dedicated pediatric medical exams, developmental growth tracking, and routine vaccinations.</p>
+
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Growth & Development Check</li>
+                    <li><i class="fa-solid fa-check"></i> Immunization & Vaccination</li>
+                    <li><i class="fa-solid fa-check"></i> Child Nutrition Counseling</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="service-price">$80 <span style="font-size: 0.8rem; font-weight: normal; color: #64748b;">/ session</span></div>
+                <a href="index.html#booking" class="btn btn-outline" style="display: block; text-align: center; text-decoration: none;" onclick="bookServiceForDoctor('Dr. Emily Davis')">Book This Service</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ==========================================
+   FOOTER SECTION
+   ========================================== -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 MedCare. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- ==========================================
+   PAGE SCRIPTS
+   ========================================== -->
+<script>
+    // Save selected doctor to localStorage for smooth appointment booking integration
+    function bookServiceForDoctor(doctorName) {
+        localStorage.setItem('selectedDoctorForBooking', doctorName);
+    }
+</script>
+
+<!-- Main JS File for Global Floating Dark Mode Toggle -->
+<script src="js/main.js"></script>
+</body>
+</html>

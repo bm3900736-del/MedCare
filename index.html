@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCare - Healthcare & Medical Landing Page</title>
+    
+    <!-- CSS File -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ==========================================================================
+       HEADER SECTION
+       - Main navigation bar with brand logo and page links.
+       ========================================================================== -->
+    <header class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Med<span>Care</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="doctors.html">Doctors</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="my-bookings.html">My Bookings</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#booking" class="btn btn-primary">Book Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+       HERO SECTION
+       - Main banner highlighting the healthcare services and value proposition.
+       ========================================================================== -->
+    <section id="hero" class="hero-section">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Professional Healthcare Services for Your Family</h1>
+                <p>We provide top-quality medical services with certified doctors and modern healthcare technologies.</p>
+                <a href="#booking" class="btn btn-primary">Schedule a Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       SERVICES SECTION
+       - Showcases core medical departments and services offered.
+       ========================================================================== -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-title">Our Medical Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>General Checkup</h3>
+                    <p>Accurate diagnoses and comprehensive medical exams to track your overall health.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Pediatric Care</h3>
+                    <p>Dedicated medical care, routine checkups, and vaccinations for children.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Laboratory Tests</h3>
+                    <p>Precise diagnostic lab tests to ensure early detection and prevention.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       DOCTORS SCHEDULE GRID SECTION
+       - Displays medical specialists, their schedule, and quick booking triggers.
+       ========================================================================== -->
+    <section class="doctors-table-section" style="padding: 40px 0;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 25px;">Medical Specialists Schedule</h2>
+            
+            <div class="doctors-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+                
+                <!-- Doctor 1 -->
+                <div class="doctor-card service-card" style="padding: 20px; text-align: left;">
+                    <h3 style="margin-bottom: 8px;">Dr. Sarah Johnson</h3>
+                    <p style="color: #007bff; font-weight: 600; margin-bottom: 10px;">Cardiology</p>
+                    <p style="font-size: 14px; margin-bottom: 5px;"><i class="fa-regular fa-calendar-check" style="margin-right: 5px; color: #007bff;"></i><strong>Days:</strong> Mon - Wed - Fri</p>
+                    <p style="font-size: 14px; margin-bottom: 18px;"><i class="fa-regular fa-clock" style="margin-right: 5px; color: #007bff;"></i><strong>Hours:</strong> 08:00 AM - 04:00 PM</p>
+                    <a href="#booking" class="btn btn-outline" style="display: block; text-align: center; text-decoration: none;" onclick="selectDoctorAndScroll('Dr. Sarah Johnson')">Book Consultation</a>
+                </div>
+
+                <!-- Doctor 2 -->
+                <div class="doctor-card service-card" style="padding: 20px; text-align: left;">
+                    <h3 style="margin-bottom: 8px;">Dr. Robert Wilson</h3>
+                    <p style="color: #007bff; font-weight: 600; margin-bottom: 10px;">Heart Surgery</p>
+                    <p style="font-size: 14px; margin-bottom: 5px;"><i class="fa-regular fa-calendar-check" style="margin-right: 5px; color: #007bff;"></i><strong>Days:</strong> Tue - Thu - Sat</p>
+                    <p style="font-size: 14px; margin-bottom: 18px;"><i class="fa-regular fa-clock" style="margin-right: 5px; color: #007bff;"></i><strong>Hours:</strong> 10:00 AM - 06:00 PM</p>
+                    <a href="#booking" class="btn btn-outline" style="display: block; text-align: center; text-decoration: none;" onclick="selectDoctorAndScroll('Dr. Robert Wilson')">Book Consultation</a>
+                </div>
+
+                <!-- Doctor 3 -->
+                <div class="doctor-card service-card" style="padding: 20px; text-align: left;">
+                    <h3 style="margin-bottom: 8px;">Dr. Michael Chen</h3>
+                    <p style="color: #007bff; font-weight: 600; margin-bottom: 10px;">Neurology</p>
+                    <p style="font-size: 14px; margin-bottom: 5px;"><i class="fa-regular fa-calendar-check" style="margin-right: 5px; color: #007bff;"></i><strong>Days:</strong> Daily (Except Sunday)</p>
+                    <p style="font-size: 14px; margin-bottom: 18px;"><i class="fa-regular fa-clock" style="margin-right: 5px; color: #007bff;"></i><strong>Hours:</strong> 09:00 AM - 05:00 PM</p>
+                    <a href="#booking" class="btn btn-outline" style="display: block; text-align: center; text-decoration: none;" onclick="selectDoctorAndScroll('Dr. Michael Chen')">Book Consultation</a>
+                </div>
+
+                <!-- Doctor 4 -->
+                <div class="doctor-card service-card" style="padding: 20px; text-align: left;">
+                    <h3 style="margin-bottom: 8px;">Dr. Emily Davis</h3>
+                    <p style="color: #007bff; font-weight: 600; margin-bottom: 10px;">Pediatrics</p>
+                    <p style="font-size: 14px; margin-bottom: 5px;"><i class="fa-regular fa-calendar-check" style="margin-right: 5px; color: #007bff;"></i><strong>Days:</strong> Sun - Tue - Thu</p>
+                    <p style="font-size: 14px; margin-bottom: 18px;"><i class="fa-regular fa-clock" style="margin-right: 5px; color: #007bff;"></i><strong>Hours:</strong> 08:00 AM - 02:00 PM</p>
+                    <a href="#booking" class="btn btn-outline" style="display: block; text-align: center; text-decoration: none;" onclick="selectDoctorAndScroll('Dr. Emily Davis')">Book Consultation</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       TESTIMONIALS SECTION
+       - Patient reviews and feedback.
+       ========================================================================== -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Patient Testimonials</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="review-text">"Exceptional care and very professional medical staff. My appointment booking was seamless!"</p>
+                    <div class="patient-name">- David K.</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="review-text">"Great experience with the specialists. Highly recommended for reliable healthcare services."</p>
+                    <div class="patient-name">- Maria S.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       FAQ SECTION
+       - Frequently asked questions about bookings and services.
+       ========================================================================== -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3 class="faq-question">How do I schedule an appointment?</h3>
+                    <p class="faq-answer">You can easily book an appointment using our online booking form above or by contacting our reception desk.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What insurance plans are accepted?</h3>
+                    <p class="faq-answer">We accept most major health insurance providers. Please contact us to confirm your coverage details.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I reschedule or cancel my appointment?</h3>
+                    <p class="faq-answer">Yes, you can reschedule or cancel your appointment up to 24 hours prior to your scheduled time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- ==========================================================================
+   BOOKING SECTION
+   - Interactive appointment booking
+   ========================================== -->
+<section id="booking" class="booking-section">
+    <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header">
+            <h2>Book an Appointment</h2>
+            <p>Select your preferred specialist, choose a date, and confirm your booking instantly.</p>
+        </div>
+
+        <!-- Booking Card Wrapper -->
+        <div class="booking-card-wrapper">
+            <form id="appointmentForm" class="appointment-form" novalidate>
+                
+                <!-- Full Name Field (autocomplete="off" removes the popup dropdown) -->
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" class="form-control" required placeholder="Enter your full name" autocomplete="off">
+                </div>
+
+                <!-- Select Doctor Field -->
+                <div class="form-group">
+                    <label for="doctorSelect">Select Doctor</label>
+                    <select id="doctorSelect" name="doctorSelect" class="form-control" required>
+                        <option value="" disabled selected>-- Choose a Specialist --</option>
+                        <option value="Dr. Sarah Johnson">Dr. Sarah Johnson - Cardiology</option>
+                        <option value="Dr. Robert Wilson">Dr. Robert Wilson - Heart Surgery</option>
+                        <option value="Dr. Michael Chen">Dr. Michael Chen - Neurology</option>
+                        <option value="Dr. Emily Davis">Dr. Emily Davis - Pediatrics</option>
+                    </select>
+                </div>
+
+                <!-- Appointment Date Field -->
+                <div class="form-group">
+                    <label for="appointmentDate">Appointment Date</label>
+                    <input type="date" id="appointmentDate" name="appointmentDate" class="form-control" required>
+                </div>
+
+                <!-- Time Slots Field -->
+                <div class="form-group">
+                    <label for="appointmentTime">Select Time Slot</label>
+                    <select id="appointmentTime" name="appointmentTime" class="form-control" required>
+                        <option value="" disabled selected>-- Select Doctor & Date First --</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn" class="btn btn-primary btn-block">Confirm Booking</button>
+                
+                <!-- Dynamic Alert Box -->
+                <div id="bookingAlert" class="booking-alert"></div>
+            
+            </form>
+        </div>
+
+    </div>
+</section>
+
+    <!-- ==========================================================================
+       FOOTER SECTION
+       - Copyright and footer links.
+       ========================================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 MedCare. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript File -->
+    <script src="js/main.js"></script>
+</body>
+</html>
